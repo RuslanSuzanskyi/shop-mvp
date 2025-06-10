@@ -16,8 +16,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${montserrat.className} h-full leading-none w-full scroll-smooth md:scroll-auto`}>
-      <body className={`font-sans bg-white text-black flex flex-col min-h-screen h-full tracking-wide`}>
+    <html lang="en" className={`${montserrat.className} leading-none w-full scroll-smooth md:scroll-auto`}>
+      <body className={`font-sans bg-white text-black flex flex-col min-h-screen tracking-wide`}>
         <Header />
         <main className="flex-1 pt-12">
           <Wrapper>
