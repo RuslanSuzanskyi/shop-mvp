@@ -4,7 +4,7 @@ import Wrapper from "@/components/ui/wrapper/Wrapper";
 
 export default function Header() {
   return (
-    <header className="w-full bg-white sticky border-b border-solid border-gray-300">
+    <header className="flex-0 flex-shrink-0 w-full bg-white sticky top-0 z-100 left-0 border-b border-solid border-gray-300">
       <Wrapper>
         <nav className="flex items-center min-h-16 py-4">
           <Logo />

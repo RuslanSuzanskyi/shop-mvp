@@ -17,9 +17,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${montserrat.className} h-full leading-none w-full scroll-smooth md:scroll-auto`}>
-      <body className={`font-sans bg-white text-black flex flex-col min-h-full tracking-wide`}>
+      <body className={`font-sans bg-white text-black flex flex-col min-h-screen h-full tracking-wide`}>
         <Header />
-        <main className="flex-grow pt-12">
+        <main className="flex-1 pt-12">
           <Wrapper>
             {children}
           </Wrapper>
