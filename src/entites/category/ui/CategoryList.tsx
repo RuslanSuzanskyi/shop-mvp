@@ -1,4 +1,4 @@
-import { getCategoryListClass } from "../../../../utils/getCategoryListClass";
+import { getCategoryListClass } from "../../../utils/getCategoryListClass";
 import { CategoryListProps } from "../model/types";
 
 export default async function CategoryList({ variant }: CategoryListProps) {
