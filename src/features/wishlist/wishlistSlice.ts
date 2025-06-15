@@ -9,22 +9,6 @@ const initialState: WishlistState = {
   items: [],
 };
 
-const loadWishlistFromLocalStorage = (): ProductProps[] => {
-  if (typeof window !== 'undefined') {
-    try {
-      const serializedWishlist = localStorage.getItem('wishlist');
-      if (serializedWishlist === null) {
-        return [];
-      }
-      return JSON.parse(serializedWishlist) as ProductProps[];
-    } catch (error) {
-      console.error("Failed to load wishlist from localStorage:", error);
-      return [];
-    }
-  }
-  return [];
-};
-
 const saveWishlistToLocalStorage = (wishlistItems: ProductProps[]) => {
   if (typeof window !== 'undefined') {
     try {
@@ -38,10 +22,12 @@ const saveWishlistToLocalStorage = (wishlistItems: ProductProps[]) => {
 
 const wishlistSlice = createSlice({
   name: 'wishlist',
-  initialState: {
-    items: loadWishlistFromLocalStorage(),
-  },
+  initialState,
   reducers: {
+    setWishlist: (state, action: PayloadAction<ProductProps[]>) => {
+      state.items = action.payload;
+    },
+
     addToWishlist: (state, action: PayloadAction<ProductProps>) => {
       const productToAdd = action.payload;
       const existingItem = state.items.find(item => item.id === productToAdd.id);
@@ -64,6 +50,6 @@ const wishlistSlice = createSlice({
   },
 });
 
-export const { addToWishlist, removeFromWishlist, clearWishlist } = wishlistSlice.actions;
+export const { setWishlist, addToWishlist, removeFromWishlist, clearWishlist } = wishlistSlice.actions;
 
 export default wishlistSlice.reducer;

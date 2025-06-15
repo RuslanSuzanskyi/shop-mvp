@@ -1,14 +1,43 @@
 "use client";
 
+import { ProductProps } from "@/entites/product/model/types";
 import ProductCard from "@/entites/product/ui/ProductCard";
 import WishlistButton from "@/entites/wishlist/ui/WishlistButton";
+import { setWishlist } from "@/features/wishlist/wishlistSlice";
 import { RootState } from "@/lib/store";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 export default function WishlistPage() {
   const dispatch = useDispatch();
   const wishlistItems = useSelector((state: RootState) => state.wishlist.items);
+
+  const [hasMounted, setHasMounted] = useState(false);
+
+  useEffect(() => {
+    const loadFromLocalStorage = () => {
+      try {
+        const serializedWishlist = localStorage.getItem('wishlist');
+        if (serializedWishlist === null) {
+          return [];
+        }
+        return JSON.parse(serializedWishlist) as ProductProps[];
+      } catch (error) {
+        console.error("Failed to load wishlist from localStorage on mount:", error);
+        return [];
+      }
+    };
+
+    dispatch(setWishlist(loadFromLocalStorage()));
+    setHasMounted(true);
+  }, [dispatch]);
+
+  if (!hasMounted) {
+    return (
+      <h1 className="text-4xl font-bold text-center py-10">YOUR WISHLIST</h1>
+    );
+  }
 
   return (
     <>
