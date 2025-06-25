@@ -9,6 +9,7 @@ const nextConfig: NextConfig = {
         pathname: '**',
       },
     ],
+    domains: ['fakestoreapi.in', 'storage.googleapis.com'],
   },
 };
 

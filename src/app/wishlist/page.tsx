@@ -1,7 +1,6 @@
 "use client";
 
 import ProductCard from "@/entites/product/ui/ProductCard";
-import { useWishlistLoader } from "@/hooks/useWishlistLoader";
 import { RootState } from "@/lib/store";
 import Link from "next/link";
 import { useDispatch, useSelector } from "react-redux";
@@ -9,14 +8,6 @@ import { useDispatch, useSelector } from "react-redux";
 export default function WishlistPage() {
   const dispatch = useDispatch();
   const wishlistItems = useSelector((state: RootState) => state.wishlist.items);
-
-  const hasMounted = useWishlistLoader();
-
-  if (!hasMounted) {
-    return (
-      <h1 className="text-4xl font-bold text-center py-10">YOUR WISHLIST</h1>
-    );
-  }
 
   return (
     <>
@@ -32,10 +23,10 @@ export default function WishlistPage() {
       ) : (
         <ul>
           {wishlistItems.map(product => (
-              <li key={product.id} className="w-full">
-                <ProductCard product={product} />
-              </li>
-            ))}
+            <li key={product.id} className="w-full">
+              <ProductCard product={product} />
+            </li>
+          ))}
         </ul>
       )}
     </>
