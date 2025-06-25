@@ -3,6 +3,7 @@ import Logo from "./components/Logo";
 import Wrapper from "@/components/ui/wrapper/Wrapper";
 import WishlistCountLink from "@/entites/wishlist/ui/WishlistCountLink";
 import SearchButtonWithModal from "@/components/ui/search/SearchButtonWithModal";
+import CartCountLink from "@/entites/cart/ui/CartCountLink";
 
 export default function Header() {
   return (
@@ -14,6 +15,7 @@ export default function Header() {
           <div className="ml-auto flex items-center justify-evenly gap-3">
             <SearchButtonWithModal />
             <WishlistCountLink />
+            <CartCountLink />
           </div>
         </nav> 
       </Wrapper> 
