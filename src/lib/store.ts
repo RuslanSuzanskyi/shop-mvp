@@ -13,10 +13,12 @@ import storage from 'redux-persist/lib/storage';
 
 import wishlistReducer from '@/features/wishlist/wishlistSlice';
 import productsReducer from "@/features/products/productsSlice";
+import cartReducer from '@/features/cart/cartSlice';
 
 const rootReducer = combineReducers({
   wishlist: wishlistReducer,
   products: productsReducer,
+  cart: cartReducer,
 });
 
 const persistConfig = {

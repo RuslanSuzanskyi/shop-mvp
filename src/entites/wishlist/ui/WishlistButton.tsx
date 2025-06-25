@@ -5,10 +5,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/lib/store";
 import { WishlistButtonProps } from "../model/types";
 import { addToWishlist, removeFromWishlist } from "@/features/wishlist/wishlistSlice";
+import { selectWishlistItems } from "@/features/wishlist/wishlistSelectors";
 
 export default function WishlistButton({ product, className }: WishlistButtonProps) {
   const dispatch = useDispatch();
-  const wishlistItems = useSelector((state: RootState) => state.wishlist.items);
+  const wishlistItems = useSelector(selectWishlistItems);
 
   const isInWishlist = wishlistItems.some(item => item.id === product.id);
 

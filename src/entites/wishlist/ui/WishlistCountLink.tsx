@@ -1,12 +1,12 @@
 "use client";
 
-import { RootState } from "@/lib/store";
+import { selectWishlistCount } from "@/features/wishlist/wishlistSelectors";
 import Link from "next/link";
 import { FaRegBookmark } from "react-icons/fa";
 import { useSelector } from "react-redux";
 
 export default function WishlistCountLink() {
-  const wishlistCount = useSelector((state: RootState) => state.wishlist.items.length);
+  const wishlistCount = useSelector(selectWishlistCount);
   
   return (
     <Link href="/wishlist" className="p-2 relative hover:text-gray-500 transition duration-300">
