@@ -2,11 +2,7 @@ import { ProductProps } from "@/entites/product/model/types";
 import ProductList from "@/entites/product/ui/ProductList";
 import { Suspense } from "react";
 
-type Params = { categoryName: string };
-
-type PageProps = {
-  params: Params;
-};
+type PageParams = { categoryName: string };
 
 async function getCategoryProducts(categoryName: string): Promise<ProductProps[]> {
   try {
@@ -26,7 +22,11 @@ async function getCategoryProducts(categoryName: string): Promise<ProductProps[]
   }
 };
 
-export default async function CategoryPage({ params }: PageProps) {
+export default async function CategoryPage({
+  params,
+}: {
+  params: Promise<PageParams>;
+}) {
   const { categoryName } = await params;
   const decodedCategoryName = decodeURIComponent(categoryName);
 
