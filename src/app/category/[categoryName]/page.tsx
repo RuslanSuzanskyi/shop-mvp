@@ -2,33 +2,40 @@ import { ProductProps } from "@/entites/product/model/types";
 import ProductList from "@/entites/product/ui/ProductList";
 import { Suspense } from "react";
 
+type Params = { categoryName: string };
+
+type PageProps = {
+  params: Params;
+};
+
 async function getCategoryProducts(categoryName: string): Promise<ProductProps[]> {
   try {
     const res = await fetch(`https://fakestoreapi.in/api/products/category?type=${categoryName}`, {
-      next: { revalidate: 3600 }
+      next: { revalidate: 3600 },
     });
 
     if (!res.ok) {
-      console.error(`Failed to fetch all products: ${res.status} ${res.statusText}`);
-    };
+      console.error(`Failed to fetch products: ${res.status} ${res.statusText}`);
+    }
 
     const data = await res.json();
     return data.products || [];
   } catch (error) {
-    console.error("Error in getAllProducts (server):", error);
+    console.error("Error in getCategoryProducts:", error);
     return [];
   }
-}
+};
 
-export default async function CategoryPage(props: any) {
-  const decodedCategoryName = decodeURIComponent(props.params.categoryName);
+export default async function CategoryPage({ params }: PageProps) {
+  const { categoryName } = await params;
+  const decodedCategoryName = decodeURIComponent(categoryName);
+
   const categoryProducts = await getCategoryProducts(decodedCategoryName);
 
   return (
-    <>
-      <Suspense fallback={<div>Loading...</div>}>
-        <ProductList products={categoryProducts} />
-      </Suspense>
-    </>
+    <Suspense fallback={<div>Loading...</div>}>
+      <ProductList products={categoryProducts} />
+    </Suspense>
   );
-}
+};
+
