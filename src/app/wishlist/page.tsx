@@ -3,10 +3,9 @@
 import ProductCard from "@/entites/product/ui/ProductCard";
 import { selectWishlistItems } from "@/features/wishlist/wishlistSelectors";
 import Link from "next/link";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
 export default function WishlistPage() {
-  const dispatch = useDispatch();
   const wishlistItems = useSelector(selectWishlistItems);
 
   return (

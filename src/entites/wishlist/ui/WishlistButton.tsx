@@ -2,7 +2,6 @@
 
 import { FaBookmark, FaRegBookmark  } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "@/lib/store";
 import { WishlistButtonProps } from "../model/types";
 import { addToWishlist, removeFromWishlist } from "@/features/wishlist/wishlistSlice";
 import { selectWishlistItems } from "@/features/wishlist/wishlistSelectors";
