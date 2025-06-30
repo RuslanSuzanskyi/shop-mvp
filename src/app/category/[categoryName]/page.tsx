@@ -20,9 +20,8 @@ async function getCategoryProducts(categoryName: string): Promise<ProductProps[]
   }
 }
 
-export default async function CategoryPage({ params }: { params: { categoryName: string } }) {
-  const decodedCategoryName = decodeURIComponent(params.categoryName);
-
+export default async function CategoryPage(props: any) {
+  const decodedCategoryName = decodeURIComponent(props.params.categoryName);
   const categoryProducts = await getCategoryProducts(decodedCategoryName);
 
   return (
