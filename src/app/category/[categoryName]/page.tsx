@@ -1,5 +1,4 @@
 import ProductList from "@/entites/product/ui/ProductList";
-import { Suspense } from "react";
 
 type PageParams = { categoryName: string };
 
@@ -12,9 +11,7 @@ export default async function CategoryPage({
   const decodedCategoryName = decodeURIComponent(categoryName);
 
   return (
-    <Suspense fallback={<div>Loading...</div>}>
-      <ProductList categoryName={decodedCategoryName} />
-    </Suspense>
+    <ProductList categoryName={decodedCategoryName} />
   );
 };
 
