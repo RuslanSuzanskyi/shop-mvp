@@ -3,14 +3,14 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import ProductCard from "./ProductCard";
-import { fetchProducts } from "@/features/products/productsSlice";
+import { fetchProducts, fetchProductsByCategory } from "@/features/products/productsSlice";
 import { useAppDispatch } from "@/hooks/useRedux";
 import ProductCardSkeleton from "./ProductCardSkeleton";
 import { selectProducts } from "@/features/products/productsSelectors";
 
 const PAGE_SIZE = 10;
 
-export default function ProductList() {
+export default function ProductList({ categoryName }: { categoryName?: string }) {
   const dispatch = useAppDispatch();
   const { products, isLoading, error } = useSelector(selectProducts);
 
@@ -18,9 +18,13 @@ export default function ProductList() {
 
   useEffect(() => {
     if (products.length === 0) {
-      dispatch(fetchProducts());
+      if (categoryName) {
+        dispatch(fetchProductsByCategory(categoryName));
+      } else {
+        dispatch(fetchProducts());
+      }
     }
-  }, [dispatch, products.length]);
+  }, [dispatch, categoryName, products.length]);
 
   useEffect(() => {
     function onScroll() {
