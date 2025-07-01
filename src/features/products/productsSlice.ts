@@ -10,6 +10,16 @@ export const fetchProducts = createAsyncThunk(
     return data.products as ProductProps[];
 });
 
+export const fetchProductsByCategory = createAsyncThunk(
+  "products/fetchByCategory",
+  async (category: string) => {
+    const res = await fetch(`https://fakestoreapi.in/api/products/category?type=${category}`);
+    const data = await res.json();
+    if (data.status !== "SUCCESS") throw new Error(data.message);
+    return data.products as ProductProps[];
+  }
+);
+
 interface ProductsState {
   products: ProductProps[];
   isLoading: boolean;
@@ -38,6 +48,19 @@ export const productsSlice = createSlice({
       })
       .addCase(fetchProducts.rejected, (state, action) => {
         state.error = action.error.message || 'Failed to fetch products.';
+        state.isLoading = false;
+      })
+
+      .addCase(fetchProductsByCategory.pending, (state) => {
+        state.isLoading = true;
+        state.error = null;
+      })
+      .addCase(fetchProductsByCategory.fulfilled, (state, action) => {
+        state.products = action.payload;
+        state.isLoading = false;
+      })
+      .addCase(fetchProductsByCategory.rejected, (state, action) => {
+        state.error = action.error.message ?? 'Failed to fetch category products';
         state.isLoading = false;
       });
   },
