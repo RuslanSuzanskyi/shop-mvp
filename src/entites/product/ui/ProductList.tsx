@@ -3,7 +3,6 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import ProductCard from "./ProductCard";
-import { RootState } from "@/lib/store";
 import { fetchProducts } from "@/features/products/productsSlice";
 import { useAppDispatch } from "@/hooks/useRedux";
 import ProductCardSkeleton from "./ProductCardSkeleton";
